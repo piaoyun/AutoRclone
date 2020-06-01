@@ -23,7 +23,7 @@ sleep_time = 30
 def _create_accounts(service,project,count):
     batch = service.new_batch_http_request(callback=_def_batch_resp)
     for i in range(count):
-        aid = _generate_id('mfc-')
+        aid = _generate_id('share')
         batch.add(service.projects().serviceAccounts().create(name='projects/' + project, body={ 'accountId': aid, 'serviceAccount': { 'displayName': aid }}))
     batch.execute()
 
@@ -37,8 +37,8 @@ def _create_remaining_accounts(iam,project):
 
 # Generate a random id
 def _generate_id(prefix='saf-'):
-    chars = '-abcdefghijklmnopqrstuvwxyz1234567890'
-    return prefix + ''.join(choice(chars) for _ in range(25)) + choice(chars[1:])
+    chars = '1234567890'
+    return prefix + ''.join(choice(chars) for _ in range(2)) + choice(chars[1:])
 
 # List projects using service
 def _get_projects(service):
